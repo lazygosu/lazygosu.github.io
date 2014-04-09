@@ -1,45 +1,6 @@
-<html>
-  <head>
-    <link rel=StyleSheet href="lazy.css" type="text/css">
-    <link href="prettify.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="prettify.js"></script>
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-20364649-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-  </head>
-  <body onload="prettyPrint()">
-
-    <!-- HEADER -->
-    <div>
-      <div class="title">
-        The Lazy Gosuer<br/>
-        <span class="tagline">Less Code, More Beer</span>
-      </div>
-      <div class="links">
-        <a href="intro.html">Intro</a>
-        <a href="strings.html">Strings/IO</a>
-        <a href="enhancements.html">Enhancements</a>
-        <a href="data.html">Data</a>
-        <a href="xml.html">XML</a>
-        <a href="build.html">Build</a>
-        <a href="web.html">Web</a>
-        <a href="generics.html">Generics</a>
-        <a href="misc.html">Misc</a>
-        <a href="api.html">API</a>
-        <a href="ots.html">OTS</a>
-      </div>
-    </div>
-
-    <div class="content">
+---
+layout: default
+---
       <h1>The Open Type System</h1>
       <p>The cornerstone of Gosu, the thing that makes it different than other languages, is the Open Type System.  This is the API that allows Gosu to use various kinds of resources in a statically typed, easily toolbable manner.  The beauty is that all you need to do is implement some java interfaces and, blam, you've got your custom type system.</p>
       <p>As a concrete example, the OTS is what allows Gosu to work with WSDL types directly, without code generation.</p>
@@ -99,6 +60,3 @@
       If you are interested in creating a custom type system, you should take a look at the examples that come with gosu, or maybe take a look at one of my pet projects here:<br/><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://protocols.github.com/">http://protocols.github.com/</a><br/><br/>
     </p>
-    </div>
-  </body>
-</html>

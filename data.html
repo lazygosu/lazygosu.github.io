@@ -1,94 +1,66 @@
-<html>
-  <head>
-    <link rel=StyleSheet href="lazy.css" type="text/css">
-    <link href="prettify.css" type="text/css" rel="stylesheet" />
-    <script type="text/javascript" src="prettify.js"></script>
-    <script type="text/javascript">
+---
+layout: default
+---
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-20364649-1']);
-      _gaq.push(['_trackPageview']);
+<h1>Data</h1>
+<p>Data structures are one of the most important aspects of a language when it comes to productivity. Java has great
+  implementations of the common data structures (e.g <code>java.util.ArrayList</code> and
+  <code>java.util.HashTable</code>) but it doesn't help you much when you want to manipulate them: you often end up
+  writing out the same code over and over again to filter lists, to sort them, etc.</p>
+<p>Gosu addresses this problem by adding new methods that leverage Gosu's language features (blocks, in particular) to
+  the core data structures from Java. Gosu also provides additional syntactic support for common collections.</p>
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-  </head>
-  <body onload="prettyPrint()">
-
-    <!-- HEADER -->
-    <div>
-      <div class="title">
-        The Lazy Gosuer<br/>
-        <span class="tagline">Less Code, More Beer</span>
-      </div>
-      <div class="links">
-        <a href="intro.html">Intro</a>
-        <a href="strings.html">Strings/IO</a>
-        <a href="enhancements.html">Enhancements</a>
-        <a href="data.html">Data</a>
-        <a href="xml.html">XML</a>
-        <a href="build.html">Build</a>
-        <a href="web.html">Web</a>
-        <a href="generics.html">Generics</a>
-        <a href="misc.html">Misc</a>
-        <a href="api.html">API</a>
-        <a href="ots.html">OTS</a>
-      </div>
-    </div>
-
-    <div class="content">
-      <h1>Data</h1>
-      <p>Data structures are one of the most important aspects of a language when it comes to productivity.  Java has great implementations of the common data structures (e.g <code>java.util.ArrayList</code> and <code>java.util.HashTable</code>) but it doesn't help you much when you want to manipulate them: you often end up writing out the same code over and over again to filter lists, to sort them, etc.</p>
-      <p>Gosu addresses this problem by adding new methods that leverage Gosu's language features (blocks, in particular) to the core data structures from Java.  Gosu also provides additional syntactic support for common collections.</p>
-
-      <h2>Lists</h2>
-      <p>As you may have noticed, a list in Gosu can be declared by using <code>{}</code>'s:
-      <pre class="prettyprint">
+<h2>Lists</h2>
+<p>As you may have noticed, a list in Gosu can be declared by using <code>{}</code>'s:
+<pre class="prettyprint">
         
   var lstOfStrings = {"This", "is", "a", "list"}
       </pre>
-      You can use Array-style access on lists:
-      <pre class="prettyprint">
+You can use Array-style access on lists:
+<pre class="prettyprint">
         
   var lstOfStrings = {"This", "is", "a", "list"}
   print( lstOfStrings[2] ) // prints "a"
       </pre>
-      </p>      
-      <h3>Blocks</h3>
-      <p>Lists in Gosu have a lot of enhancement methods on them, many of which use blocks.  Blocks (also called closures or lambda expressions) are a simple way to specify an inline function.  They have a lot of uses, but they really shine in data structure manipulation:
-      <pre class="prettyprint">
+</p>
+<h3>Blocks</h3>
+<p>Lists in Gosu have a lot of enhancement methods on them, many of which use blocks. Blocks (also called closures or
+  lambda expressions) are a simple way to specify an inline function. They have a lot of uses, but they really shine in
+  data structure manipulation:
+<pre class="prettyprint">
         
   var lstOfStrings = {"This", "is", "a", "list"}
   var longStrings = lstOfStrings.where( \ s -> s.length > 2 )
   print( longStrings.join(", ") )  // prints "This, list"
       </pre>
-      The funny <code>\-></code> thing is the block.  It declares a mini-function that says "Given a String <code>s</code> return whether <code>s.length</code> is greater than two".  You can think of it as an inline version of this function:
-      <pre class="prettyprint">
+The funny <code>\-></code> thing is the block.  It declares a mini-function that says "Given a String
+<code>s</code> return whether
+<code>s.length</code> is greater than two".  You can think of it as an inline version of this function:
+<pre class="prettyprint">
         
   function isLongerThanTwo( s : String ) : boolean {
     return s.length > 2
   }
       </pre>
-      Or, if you prefer, this anonymous inner class:
-          <pre class="prettyprint">
+Or, if you prefer, this anonymous inner class:
+<pre class="prettyprint">
             
   var inner = new com.google.common.base.Predicate&lt;String>() {
     function apply( s : String ) : boolean {
       return s.length > 2
     }
   }
-      </pre>      
-      Blocks allow you to express this logic much more succinctly.
-      </p>
-      <p>
-      Note that I didn't have to declare a type for the block's parameter, <code>s</code>, like I did in the function and anonymous class above.  This because the block is defined in a context where Gosu can figure out the argument is a String.  Typically you will not have to define the types of the arguments of blocks.
-      </p>
-      <p>With blocks you can often remove loads of iterative code you would end up writing in Java.  Consider this java code:
+      </pre>
+Blocks allow you to express this logic much more succinctly.
+</p>
+<p>
+  Note that I didn't have to declare a type for the block's parameter, <code>s</code>, like I did in the function and
+  anonymous class above. This because the block is defined in a context where Gosu can figure out the argument is a
+  String. Typically you will not have to define the types of the arguments of blocks.
+</p>
+<p>With blocks you can often remove loads of iterative code you would end up writing in Java. Consider this java code:
 
-      <pre class="prettyprint">
+<pre class="prettyprint">
 
   List&lt;String> lstOfStrings = Arrays.asList("This", "is", "a", "list");
 
@@ -117,8 +89,8 @@
   System.out.println(sb.toString());
       </pre>
 
-      This code can be written in Gosu like so:
-      <pre class="prettyprint">
+This code can be written in Gosu like so:
+<pre class="prettyprint">
         
   var lstOfStrings = {"This", "is", "a", "list"}
   var longStrings = lstOfStrings.where( \ s -> s.length > 2 )
@@ -126,69 +98,78 @@
                                 .orderBy( \ s -> s )            // there is a .order() method that could be used here instead
   print( longStrings.join(", ") ) // prints "LIST, THIS"
       </pre>
-      In Gosu the code more clearly expressed the algorithm, it is less coupled (there is no mix of algorithmic steps in a for-loop, for example) and certainly less verbose.
-      </p>
-      <p>
-      Blocks have other uses, but, by and large, the big win with them is in Collection manipulation.
-      </p>
-      <h4>Blocks and Interfaces</h4>
-      <p>
-      Java has many interfaces that contain a single method, which are used as a stand-in for actual closures.  In order to facilitate Java interoperability, Gosu blocks and one-method interfaces are automatically converted between one another:
-      <pre class="prettyprint">
+In Gosu the code more clearly expressed the algorithm, it is less coupled (there is no mix of algorithmic steps in a for-loop, for example) and certainly less verbose.
+</p>
+<p>
+  Blocks have other uses, but, by and large, the big win with them is in Collection manipulation.
+</p>
+<h4>Blocks and Interfaces</h4>
+<p>
+  Java has many interfaces that contain a single method, which are used as a stand-in for actual closures. In order to
+  facilitate Java interoperability, Gosu blocks and one-method interfaces are automatically converted between one
+  another:
+<pre class="prettyprint">
         
   var r : Runnable
   r = \-> print("This block was converted to a Runnable")
       </pre>
-      This makes some Java APIs very enjoyable to work with in Gosu.
-      </p>
+This makes some Java APIs very enjoyable to work with in Gosu.
+</p>
 
-      <h3>List Enhancements</h3>
-      <p>Here are some of the more useful enhancement methods on Lists:</p>
-      <ul>
-        <li><code>map()</code> - transforms each element in a list with the given block</li>
-        <li><code>orderBy()</code> - creates a new list ordered by the value returned by the given block</li>
-        <li><code>thenBy()</code> - once you've called <code>orderBy</code> on a List, you can call <code>thenBy</code> to add additional sorting conditions</li>
-        <li><code>where()</code> - creates a new list of all elements that return <code>true</code> for the given block</li>
-        <li><code>whereTypeIs()</code> - returns a new list where all elements have the given type</li>
-        <li><code>first()/last()</code> - return the first and last element of the list, respectively</li>
-        <li><code>firstWhere()/lastWhere()</code> - return the first and last element of the list that match the given block, respectively</li>
-        <li><code>partition()</code> - converts the List to a Map, where the keys are the values returned by the given block, and the values are Lists of all elements that mapped to that key</li>
-        <li><code>toSet()</code> - converts the List to a Set</li>
-        <li><code>join()</code> - converts the List to String, using the given string as a delimiter between each element</li>
-        <li><code>maxBy()</code> - returns the element in the list that has the maximum value returned by the given block</li>
-        <li><code>toTypedArray()</code> - returns a strongly typed array of the List (e.g. List&lt;String> returns a String[])</li>
-      </ul>
-      There are more.  Code completion is your friend.
-      </p>
+<h3>List Enhancements</h3>
+<p>Here are some of the more useful enhancement methods on Lists:</p>
+<ul>
+  <li><code>map()</code> - transforms each element in a list with the given block</li>
+  <li><code>orderBy()</code> - creates a new list ordered by the value returned by the given block</li>
+  <li><code>thenBy()</code> - once you've called <code>orderBy</code> on a List, you can call <code>thenBy</code> to add
+    additional sorting conditions
+  </li>
+  <li><code>where()</code> - creates a new list of all elements that return <code>true</code> for the given block</li>
+  <li><code>whereTypeIs()</code> - returns a new list where all elements have the given type</li>
+  <li><code>first()/last()</code> - return the first and last element of the list, respectively</li>
+  <li><code>firstWhere()/lastWhere()</code> - return the first and last element of the list that match the given block,
+    respectively
+  </li>
+  <li><code>partition()</code> - converts the List to a Map, where the keys are the values returned by the given block,
+    and the values are Lists of all elements that mapped to that key
+  </li>
+  <li><code>toSet()</code> - converts the List to a Set</li>
+  <li><code>join()</code> - converts the List to String, using the given string as a delimiter between each element</li>
+  <li><code>maxBy()</code> - returns the element in the list that has the maximum value returned by the given block</li>
+  <li><code>toTypedArray()</code> - returns a strongly typed array of the List (e.g. List&lt;String> returns a String[])
+  </li>
+</ul>
+There are more.  Code completion is your friend.
+</p>
 
-      <h2>Maps</h2>
-      <p>Maps can be declared by using <code>{}</code>'s with a right-arrow between keys and values:
-      <pre class="prettyprint">
+<h2>Maps</h2>
+<p>Maps can be declared by using <code>{}</code>'s with a right-arrow between keys and values:
+<pre class="prettyprint">
         
   var mapOfStringsToStrings = {"This" -> "is", "a" -> "map"}
       </pre>
-      You can also use Array-style access on maps:
-      <pre class="prettyprint">
+You can also use Array-style access on maps:
+<pre class="prettyprint">
         
   var mapOfStringsToStrings = {"This" -> "is", "a" -> "map"}
   print( mapOfStringsToStrings["This"] ) // prints "is"
       </pre>
-      </p>      
-      <h3>Map Enhancements</h3>
-      <p>There are fewer enhancement methods on Maps than Lists, but there are some:</p>
-      <ul>
-        <li><code>mapValues()</code> - transforms each value with the given block and returns the resulting map</li>
-        <li><code>writeToPropertiesFile()</code> - Calls .toString() on each key and value, and save the result to the properties file passed in.</li>
-        <li><code>Map.readFromPropertiesFile()</code> - A static method that returns a <code>Map&lt;String, String></code> from the given properties file</li>       
-      </ul>
-      One useful trick is to use methods on <code>Map.entrySet()</code> to modify the Map:
-      <pre class="prettyprint">
+</p>
+<h3>Map Enhancements</h3>
+<p>There are fewer enhancement methods on Maps than Lists, but there are some:</p>
+<ul>
+  <li><code>mapValues()</code> - transforms each value with the given block and returns the resulting map</li>
+  <li><code>writeToPropertiesFile()</code> - Calls .toString() on each key and value, and save the result to the
+    properties file passed in.
+  </li>
+  <li><code>Map.readFromPropertiesFile()</code> - A static method that returns a <code>Map&lt;String, String></code>
+    from the given properties file
+  </li>
+</ul>
+One useful trick is to use methods on <code>Map.entrySet()</code> to modify the Map:
+<pre class="prettyprint">
         
   var mapOfStringsToStrings = {"This" -> "is", "a" -> "map"}
   // removes all entries with a key whose length is less than 2
   mapOfStringsToStrings.entrySet().retainWhere( \ p -> p.Key.length > 2  )
       </pre>
-      </p>
-    </div>
-  </body>
-</html>
